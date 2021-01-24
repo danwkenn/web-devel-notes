@@ -1,0 +1,255 @@
+header {
+  width: 100%;
+  padding: 10px;
+  height: 100px;
+  background-color: #B2D6FF;
+}
+
+.author {
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  color: #414141;               /* Dark gray */
+  background-color: #EEEEEE;    /* Light gray */
+}
+
+.sidebar{
+  float: left;                  /* Add this */
+  width: 200px;
+  background-color: #F09A9D;
+  padding: 20px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start;*/
+}
+
+.sidebar-link{
+  background-color: #F1696d;
+  padding: 15px;
+  width: 90%;
+  display: block;
+  margin-bottom: 10px;
+  color: #414141;
+  text-decoration-line: none;
+}
+
+.page {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.content {
+  float: left;                  /* Add this */
+  width: 1000px;
+  height: 100%;
+  background-color: #F5CF8E;
+}
+
+.content {
+  padding: 20px;
+}
+
+.container {
+  overflow: hidden;
+  background-color: #EAEDF0;
+}
+
+.button {
+ color: #FFF;
+ background-color: #5995DA;    /* Blue */
+ font-weight: bold;
+ padding: 20px;
+ text-align: center;
+ border: 2px solid #5D6063;    /* Dark gray */
+ border-radius: 5px;
+ width: 200px;
+ margin: 20px auto;
+}
+
+.call-to-action {
+  font-style: italic;
+  background-color: #EEB75A;    /* Yellow */
+}
+
+.button2:link,                 /* Change this */
+.button2:visited {             /* Change this */
+  display: block;             /* Add this */
+  text-decoration: none;      /* Add this */
+
+  color: #FFF;                /* The rest is the same */
+  background-color: #5995DA;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #5D6063;
+  border-radius: 5px;
+
+  width: 200px;
+  margin: 20px auto;
+}
+
+.button2:hover,
+.button2:visited:hover {
+  color: #FFF;
+  background-color: #76AEED;  /* Light blue */
+}
+
+.button2:active,
+.button2:visited:active {
+  color: #FFF;
+  background-color: #FF0000;  /* Blue */
+}
+
+.call-to-action2:link,
+.call-to-action2:visited {
+  font-style: italic;
+  background-color: #EEB75A;     /* Yellow */
+}
+
+.call-to-action2:hover,
+.call-to-action2:visited:hover {
+  background-color: #F5CF8E;     /* Light yellow */
+}
+
+.call-to-action2:active,
+.call-to-action2:visited:active {
+  background-color: #FF0000;     /* Yellow */
+}
+
+.footer_ex_float {
+  overflow: hidden;
+  background-color: #D6E9FE;
+}
+
+.footer-item_ex_float {
+  float: left;
+  width: 31%;
+  margin: 20px 1.15%;
+  height: 160px;
+  background-color: #B2D6FF;    /* Medium blue */
+  overflow: hidden;
+}
+
+.avatar {
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 25px;
+  border-radius: 40px;
+  background-color: #D6E9FE;
+}
+
+.username {
+  margin-top: 30px;
+}
+
+.comment {
+  margin: 10px;
+  overflow: hidden;  /* This is important */
+  font-size: 8px;
+}
+
+.page_ex_float {
+  width: 900px;
+  margin: 0 auto;
+}
+
+.container_ex_float {
+  overflow: hidden;
+  background-color: #EAEDF0;
+}
+
+.menu_ex_float {
+  height: 100px;
+  background-color: #B2D6FF;    /* Medium blue */
+}
+
+.sidebar_ex_float {
+  float: left;                  /* Add this */
+  width: 200px;
+  height: 300px;
+  background-color: #F09A9D;
+}
+
+.content_ex_float {
+  float: left;                  /* Add this */
+  width: 650px;
+  height: 300px;
+  background-color: #F5CF8E;
+}
+
+body{
+    background-color: ##FF0000;
+}
+
+.menu-container_fb_ex_1 {
+  color: #fff;
+  background-color: #5995DA;  /* Blue */
+  padding: 20px 0;
+}
+
+.menu-container_fb_ex_2 {
+  color: #fff;
+  background-color: #5995DA;  /* Blue */
+  padding: 20px 0;
+  display: flex;
+}
+
+.menu-container_fb_ex_3 {
+  color: #fff;
+  background-color: #5995DA;  /* Blue */
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu_fb_ex0 {
+  border: 1px solid #fff;  /* For debugging */
+  width: 900px;
+}
+
+.menu_fb_ex1 {
+  border: 1px solid #fff;  /* For debugging */
+  width: 900px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.menu_fb_ex2 {
+  border: 1px solid #fff;  /* For debugging */
+  width: 900px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu_fb_ex3 {
+  border: 1px solid #fff;  /* For debugging */
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links_fb_ex2 {
+  border: 1px solid #fff;  /* For debugging */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login_fb_ex1 {
+  margin-left: 20px;
+}
+
