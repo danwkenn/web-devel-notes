@@ -13,6 +13,7 @@ output:
 <div class='page'>
 <div class='sidebar'>
 <h3>Sections</h3>
+<p class='sidebar-list'>
 <a class='sidebar-link' href="#introduction">Introduction</a>
 <a class='sidebar-link' href="#basic-web-pages">Basic Web Pages</a>
 <a class='sidebar-link' href="#linking-and-images">Linking and Images</a>
@@ -20,8 +21,10 @@ output:
 <a class='sidebar-link' href="#the-box-model">The Box Model</a>
 <a class='sidebar-link' href="#floats">Floats</a>
 <a class='sidebar-link' href="#flexbox">Flexbox</a>
+</p>
 </div>
 <div class='content'>
+
 
 ### Notes on compilation
 

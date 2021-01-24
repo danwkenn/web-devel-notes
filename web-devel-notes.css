@@ -28,18 +28,23 @@ body {
 
 .sidebar{
   float: left;                  /* Add this */
-  width: 200px;
+  width: 210px;
   background-color: #F09A9D;
-  padding: 20px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start;*/
+  padding-left: 15px;
+}
+
+.sidebar-list{
+  display: block;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .sidebar-link{
   background-color: #F1696d;
-  padding: 15px;
+  box-sizing: border-box;
+  padding: 10px;
   width: 90%;
+  height = 20px;
   display: block;
   margin-bottom: 10px;
   color: #414141;
@@ -47,7 +52,7 @@ body {
 }
 
 .page {
-  width: 1300px;
+  width: 1400px;
   margin: 0 auto;
 }
 
