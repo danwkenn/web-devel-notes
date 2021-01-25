@@ -258,3 +258,17 @@ body{
   margin-left: 20px;
 }
 
+.header-container_fb_ex {
+  color: #5995DA;
+  background-color: #D6E9FE;
+  display: flex;
+  justify-content: center;
+}
+
+.header_fb_ex {
+  width: 900px;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

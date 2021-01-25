@@ -1466,8 +1466,60 @@ We can then make `links` a flex container as well to get a horizontal layout:
 </div>
 </div>
 
+## Vertical alignment
+
+Flex containers can define vertical alighnments as well as horizontal ones, which is the first bit of functionality that we can do with flexbox that we could never have done with floats. Adding the below code to our menu code will allow us to explore vertically aligning content:
+
+```html}
+<div class='header-container'>
+  <div class='header'>
+    <div class='subscribe'>Subscribe &#9662;</div>
+    <div class='logo'><img src='images/awesome-logo.svg'/></div>
+    <div class='social'><img src='images/social-icons.svg'/></div>
+  </div>
+</div>
+```
+
+We also give the `header-container` and `header` classes some properties:
+
+```css
+.header-container {
+  color: #5995DA;
+  background-color: #D6E9FE;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  width: 900px;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+```
+
+The `.header-container` has the `flex` display property and is justified in the center, which ensures all its child elements are centered on the page. The `header` is also a flexbox, but its content is justified `space-between` meaning it is roughly spread out over the width of `header`. It also has the property `align-items` as `center`, which means it vertically aligns its items in the center.
+
+<div class='menu-container_fb_ex_3'>
+<div class='menu_fb_ex2'>
+<div class='date'>Aug 14, 2016</div>
+<div class='signup'>Sign Up</div>
+<div class='login'>Login</div>
+</div>
+</div>
+<div class='header-container_fb_ex'>
+<div class='header_fb_ex'>
+<div class='subscribe'>Subscribe &#9662;</div>
+<div class='logo'><img src='flexbox/images/awesome-logo.svg'/></div>
+<div class='social'><img src='flexbox/images/social-icons.svg'/></div>
+</div>
+</div>
+
+<!---End Document--->
 
 </div>
 </div>
 </div>
 </div>
+
