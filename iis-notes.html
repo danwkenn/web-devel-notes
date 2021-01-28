@@ -1146,6 +1146,152 @@ Subscribe ▾
 </div>
 </div>
 </div>
+<p>The <code>align-items</code> property has very similar options to <code>justify-content</code>, but also includes <code>stretch</code> and <code>baseline</code>. The <code>stretch</code> option allows the creation of columns of equal height, which can be quite difficult with floats.</p>
+<h2 id="wrapping-flex-items">Wrapping Flex Items</h2>
+<p>Items can be wrapped to stay within the horizontal limits of the page using flexbox with the <code>flex-wrap</code> property. For example, we can create a row of images, and set the container <code>flex-wrap: wrap;</code>:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb78-1"><a href="#cb78-1"></a><span class="fu">.photo-grid-container</span> {</span>
+<span id="cb78-2"><a href="#cb78-2"></a>  <span class="kw">display</span>: flex<span class="op">;</span></span>
+<span id="cb78-3"><a href="#cb78-3"></a>  <span class="kw">justify-content</span>: <span class="dv">center</span><span class="op">;</span></span>
+<span id="cb78-4"><a href="#cb78-4"></a>}</span>
+<span id="cb78-5"><a href="#cb78-5"></a></span>
+<span id="cb78-6"><a href="#cb78-6"></a><span class="fu">.photo-grid</span> {</span>
+<span id="cb78-7"><a href="#cb78-7"></a>  <span class="kw">width</span>: <span class="dv">900</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb78-8"><a href="#cb78-8"></a>  <span class="kw">display</span>: flex<span class="op">;</span></span>
+<span id="cb78-9"><a href="#cb78-9"></a>  <span class="kw">justify-content</span>: flex-start<span class="op">;</span></span>
+<span id="cb78-10"><a href="#cb78-10"></a>  <span class="kw">flex-wrap</span>: wrap<span class="op">;</span></span>
+<span id="cb78-11"><a href="#cb78-11"></a>}</span>
+<span id="cb78-12"><a href="#cb78-12"></a></span>
+<span id="cb78-13"><a href="#cb78-13"></a><span class="fu">.photo-grid-item</span> {</span>
+<span id="cb78-14"><a href="#cb78-14"></a>  <span class="kw">border</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#fff</span><span class="op">;</span></span>
+<span id="cb78-15"><a href="#cb78-15"></a>  <span class="kw">width</span>: <span class="dv">300</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb78-16"><a href="#cb78-16"></a>  <span class="kw">height</span>: <span class="dv">300</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb78-17"><a href="#cb78-17"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb79-1"><a href="#cb79-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;menu-container&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a>  <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;menu&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-3"><a href="#cb79-3"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;date&#39;</span><span class="kw">&gt;</span>Aug 14, 2016<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-4"><a href="#cb79-4"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;signup&#39;</span><span class="kw">&gt;</span>Sign Up<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-5"><a href="#cb79-5"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;login&#39;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-6"><a href="#cb79-6"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-7"><a href="#cb79-7"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-8"><a href="#cb79-8"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;header-container&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-9"><a href="#cb79-9"></a>  <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;header&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-10"><a href="#cb79-10"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;subscribe&#39;</span><span class="kw">&gt;</span>Subscribe <span class="dv">&amp;#9662;</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-11"><a href="#cb79-11"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;logo&#39;</span><span class="kw">&gt;&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/awesome-logo.svg&#39;</span><span class="kw">/&gt;&lt;/div&gt;</span></span>
+<span id="cb79-12"><a href="#cb79-12"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;social&#39;</span><span class="kw">&gt;&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/social-icons.svg&#39;</span><span class="kw">/&gt;&lt;/div&gt;</span></span>
+<span id="cb79-13"><a href="#cb79-13"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-14"><a href="#cb79-14"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-15"><a href="#cb79-15"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid-container&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-16"><a href="#cb79-16"></a>  <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-17"><a href="#cb79-17"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid-item first-item&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-18"><a href="#cb79-18"></a>      <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/one.svg&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb79-19"><a href="#cb79-19"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-20"><a href="#cb79-20"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid-item&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-21"><a href="#cb79-21"></a>      <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/two.svg&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb79-22"><a href="#cb79-22"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-23"><a href="#cb79-23"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid-item&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-24"><a href="#cb79-24"></a>      <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/three.svg&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb79-25"><a href="#cb79-25"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-26"><a href="#cb79-26"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid-item&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-27"><a href="#cb79-27"></a>      <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/four.svg&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb79-28"><a href="#cb79-28"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-29"><a href="#cb79-29"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;photo-grid-item last-item&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb79-30"><a href="#cb79-30"></a>      <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&#39;images/five.svg&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb79-31"><a href="#cb79-31"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-32"><a href="#cb79-32"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb79-33"><a href="#cb79-33"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<div class="menu-container_fb_ex_3">
+<div class="menu_fb_ex2">
+<div class="date">
+Aug 14, 2016
+</div>
+<div class="signup">
+Sign Up
+</div>
+<div class="login">
+Login
+</div>
+</div>
+</div>
+<div class="header-container_fb_ex">
+<div class="header_fb_ex">
+<div class="subscribe">
+Subscribe ▾
+</div>
+<div class="logo">
+<img src='flexbox/images/awesome-logo.svg'/>
+</div>
+<div class="social">
+<img src='flexbox/images/social-icons.svg'/>
+</div>
+</div>
+</div>
+<div class="photo-grid-container_fb_ex1">
+<div class="photo-grid_fb_ex1">
+<div class="photo-grid-item first-item_fb_ex1">
+<p><img src='flexbox/images/one.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1">
+<p><img src='flexbox/images/two.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1">
+<p><img src='flexbox/images/three.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1">
+<p><img src='flexbox/images/four.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1 last-item_fb_ex1">
+<p><img src='flexbox/images/five.svg'/></p>
+</div>
+</div>
+</div>
+<h2 id="flex-direction">Flex Direction</h2>
+<p>Flex containers can render their items horizontally or vertically. To render items vertically, we can set the container’s <code>flex-direction</code> to <code>column</code>:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode css"><code class="sourceCode css"></code></pre></div>
+<div class="menu-container_fb_ex_3">
+<div class="menu_fb_ex2">
+<div class="date">
+Aug 14, 2016
+</div>
+<div class="signup">
+Sign Up
+</div>
+<div class="login">
+Login
+</div>
+</div>
+</div>
+<div class="header-container_fb_ex">
+<div class="header_fb_ex">
+<div class="subscribe">
+Subscribe ▾
+</div>
+<div class="logo">
+<img src='flexbox/images/awesome-logo.svg'/>
+</div>
+<div class="social">
+<img src='flexbox/images/social-icons.svg'/>
+</div>
+</div>
+</div>
+<div class="photo-grid-container_fb_ex1">
+<div class="photo-grid_fb_ex2">
+<div class="photo-grid-item first-item_fb_ex1">
+<p><img src='flexbox/images/one.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1">
+<p><img src='flexbox/images/two.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1">
+<p><img src='flexbox/images/three.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1">
+<p><img src='flexbox/images/four.svg'/></p>
+</div>
+<div class="photo-grid-item_fb_ex1 last-item_fb_ex1">
+<p><img src='flexbox/images/five.svg'/></p>
+</div>
+</div>
+</div>
 <!---End Document--->
 </div>
 </div>

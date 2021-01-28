@@ -1516,8 +1516,143 @@ The `.header-container` has the `flex` display property and is justified in the 
 </div>
 </div>
 
-The `align-items` property has very similar options to `justify-content`, but also includes `stretch` and `baseline`. The `stretch` option allows the creation of columns of equal height, which can be quite difficult with floats.
+The `align-items` property has very similar options to `justify-content`, but also includes `stretch` and `baseline`. The `stretch` option allows the creation of columns of equal height, which can be quite difficult with floats. 
 
+## Wrapping Flex Items
+
+Items can be wrapped to stay within the horizontal limits of the page using flexbox with the `flex-wrap` property. For example, we can create a row of images, and set the container `flex-wrap: wrap;`:
+
+```css
+.photo-grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-grid {
+  width: 900px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.photo-grid-item {
+  border: 1px solid #fff;
+  width: 300px;
+  height: 300px;
+}
+```
+
+```html
+<div class='menu-container'>
+  <div class='menu'>
+    <div class='date'>Aug 14, 2016</div>
+    <div class='signup'>Sign Up</div>
+    <div class='login'>Login</div>
+  </div>
+</div>
+<div class='header-container'>
+  <div class='header'>
+    <div class='subscribe'>Subscribe &#9662;</div>
+    <div class='logo'><img src='images/awesome-logo.svg'/></div>
+    <div class='social'><img src='images/social-icons.svg'/></div>
+  </div>
+</div>
+<div class='photo-grid-container'>
+  <div class='photo-grid'>
+    <div class='photo-grid-item first-item'>
+      <img src='images/one.svg'/>
+    </div>
+    <div class='photo-grid-item'>
+      <img src='images/two.svg'/>
+    </div>
+    <div class='photo-grid-item'>
+      <img src='images/three.svg'/>
+    </div>
+    <div class='photo-grid-item'>
+      <img src='images/four.svg'/>
+    </div>
+    <div class='photo-grid-item last-item'>
+      <img src='images/five.svg'/>
+    </div>
+  </div>
+</div>
+```
+
+<div class='menu-container_fb_ex_3'>
+<div class='menu_fb_ex2'>
+<div class='date'>Aug 14, 2016</div>
+<div class='signup'>Sign Up</div>
+<div class='login'>Login</div>
+</div>
+</div>
+<div class='header-container_fb_ex'>
+<div class='header_fb_ex'>
+<div class='subscribe'>Subscribe &#9662;</div>
+<div class='logo'><img src='flexbox/images/awesome-logo.svg'/></div>
+<div class='social'><img src='flexbox/images/social-icons.svg'/></div>
+</div>
+</div>
+<div class='photo-grid-container_fb_ex1'>
+<div class='photo-grid_fb_ex1'>
+<div class='photo-grid-item first-item_fb_ex1'>
+<img src='flexbox/images/one.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1'>
+<img src='flexbox/images/two.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1'>
+<img src='flexbox/images/three.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1'>
+<img src='flexbox/images/four.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1 last-item_fb_ex1'>
+<img src='flexbox/images/five.svg'/>
+</div>
+</div>
+</div>
+
+## Flex Direction
+
+Flex containers can render their items horizontally or vertically. To render items vertically, we can set the container's `flex-direction` to `column`:
+
+```css
+
+```
+
+<div class='menu-container_fb_ex_3'>
+<div class='menu_fb_ex2'>
+<div class='date'>Aug 14, 2016</div>
+<div class='signup'>Sign Up</div>
+<div class='login'>Login</div>
+</div>
+</div>
+<div class='header-container_fb_ex'>
+<div class='header_fb_ex'>
+<div class='subscribe'>Subscribe &#9662;</div>
+<div class='logo'><img src='flexbox/images/awesome-logo.svg'/></div>
+<div class='social'><img src='flexbox/images/social-icons.svg'/></div>
+</div>
+</div>
+<div class='photo-grid-container_fb_ex1'>
+<div class='photo-grid_fb_ex2'>
+<div class='photo-grid-item first-item_fb_ex1'>
+<img src='flexbox/images/one.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1'>
+<img src='flexbox/images/two.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1'>
+<img src='flexbox/images/three.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1'>
+<img src='flexbox/images/four.svg'/>
+</div>
+<div class='photo-grid-item_fb_ex1 last-item_fb_ex1'>
+<img src='flexbox/images/five.svg'/>
+</div>
+</div>
+</div>
 
 
 <!---End Document--->
@@ -1526,4 +1661,3 @@ The `align-items` property has very similar options to `justify-content`, but al
 </div>
 </div>
 </div>
-
