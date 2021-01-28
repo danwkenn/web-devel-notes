@@ -1516,6 +1516,10 @@ The `.header-container` has the `flex` display property and is justified in the 
 </div>
 </div>
 
+The `align-items` property has very similar options to `justify-content`, but also includes `stretch` and `baseline`. The `stretch` option allows the creation of columns of equal height, which can be quite difficult with floats.
+
+
+
 <!---End Document--->
 
 </div>
