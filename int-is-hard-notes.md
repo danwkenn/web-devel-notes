@@ -1617,7 +1617,14 @@ Items can be wrapped to stay within the horizontal limits of the page using flex
 Flex containers can render their items horizontally or vertically. To render items vertically, we can set the container's `flex-direction` to `column`:
 
 ```css
-
+.photo-grid {
+  width: 900px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
 ```
 
 <div class='menu-container_fb_ex_3'>
@@ -1654,6 +1661,24 @@ Flex containers can render their items horizontally or vertically. To render ite
 </div>
 </div>
 
+
+This ability to change the direction comes in very handy when we need to have *responsive design*, which is when the page displays differently depending on the device that it is being viewed on. Mobile phones tend to view pages in a single column, whereas on larger screens webpages are in a stacked horizontal layout.
+
+Changing the `flex-direction` also affects the way that the `justify-content` property is read by the browser. When `flex-direction=column` then `justify-content` specifies the vertical alignment rather than the horizontal alignment. Instead we use the `align-items` property. So `justify-content` specifies the alignment in the flex-direction, and `align-items` specifies the alignment in the other direction.
+
+## Flex Container Order
+
+So far it is the HTML code order alone which decides the direction and order in which elements are displayed on a page. With Flexbox, you can specify the items in a flex container to be displayed in reverse order by using `flex-direction=row-reverse` or `flex-direction=column-reverse`. When using the row-reverse direction, the order is only changed on a by-row basis, so if there are multiple rows then the items will be displayed on the same way as if it was simple row direction, but each row's order of items would change.
+
+This is great! It gives us alot of power to display items in a logical and aesthetic way. However, we should remember that content and presentation should always be separated, and the HTML should still make sense without having to actually apply the CSS.
+
+## Flex Item Order
+
+You can add an `order` value to flex items in order to control the order in which they appear. Items with a higher order appear after those with a lower order value. The default value is `0`. For example, you can force the first item to appear last:
+
+```css
+
+```
 
 <!---End Document--->
 
