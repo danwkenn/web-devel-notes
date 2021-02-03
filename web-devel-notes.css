@@ -300,3 +300,32 @@ body{
   justify-content: center;
   flex-direction: column;
 }
+
+.social_fb_ex3,
+.subscribe_fb_ex3 {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+.footer_fb_ex4 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-item_fb_ex4 {
+  border: 1px solid #fff;
+  background-color: #D6E9FE;
+  height: 200px;
+  flex: 1;
+}
+
+.footer-three_fb_ex4 {
+  flex: 2;
+}
+
+.footer-one_fb_ex4,
+.footer-three_fb_ex5 {
+  background-color: #5995DA;
+  flex: initial;
+  width: 300px;
+}

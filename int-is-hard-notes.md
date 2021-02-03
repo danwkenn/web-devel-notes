@@ -1677,8 +1677,109 @@ This is great! It gives us alot of power to display items in a logical and aesth
 You can add an `order` value to flex items in order to control the order in which they appear. Items with a higher order appear after those with a lower order value. The default value is `0`. For example, you can force the first item to appear last:
 
 ```css
-
+.first-item {
+  order: 1;
+}
 ```
+
+This order works accross rows and columns, unlike the flex-direction options.
+
+## Item Alignment
+
+We can use flex to align single items as well as entire containers. For example, we can move the "Subscribe" and social media buttons to the bottom of the header:
+
+```css
+.social,
+.subscribe {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+```
+
+<div class='header-container_fb_ex'>
+<div class='header_fb_ex'>
+<div class='subscribe_fb_ex3'>Subscribe &#9662;</div>
+<div class='logo'><img src='flexbox/images/awesome-logo.svg'/></div>
+<div class='social_fb_ex3'><img src='flexbox/images/social-icons.svg'/></div>
+</div>
+</div>
+
+Notice we are using the `align-self` rather than `align-items` property. These properties take the same values, but act on items and containers respectively.
+
+## Flexible Items
+
+So far we have seen how to position boxes, and their dimensions have largely been determined by their contents and their containers. However, we can finetune this easily. Items have a `flex` property, which takes a numerical value with a default of 1. The `flex` value tells the browser how much the item should grow as the container size increases. So if an items flex value is 2, then it will grow twice as large as an item with `flex` value 1. For example we can add some footer items:
+
+```html
+<div class='footer'>
+  <div class='footer-item footer-one'></div>
+  <div class='footer-item footer-two'></div>
+  <div class='footer-item footer-three'></div>
+</div>
+```
+
+with CSS:
+
+```css
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-item {
+  border: 1px solid #fff;
+  background-color: #D6E9FE;
+  height: 200px;
+  flex: 1;
+}
+```
+
+<div class='footer_fb_ex4'>
+<div class='footer-item_fb_ex4'></div>
+<div class='footer-item_fb_ex4y'></div>
+<div class='footer-item_fb_ex4'></div>
+</div>
+
+and then set the `flex` for the third item to be 2:
+
+```css
+.footer-three {
+  flex: 2;
+}
+```
+
+<div class='footer_fb_ex4'>
+<div class='footer-item_fb_ex4'></div>
+<div class='footer-item_fb_ex4'></div>
+<div class='footer-item_fb_ex4 footer-three_fb_ex4'></div>
+</div>
+
+We can also combine flexible width items with static width ones. For example, we can set the first and last footer items to be a particular with, and the middle one will fill up the space flexibly:
+
+```css
+.footer-one,
+.footer-three {
+  background-color: #5995DA;
+  flex: initial;
+  width: 300px;
+}
+```
+
+Note that the `flex` property is given the value "`initial`", which resets the `flex` value. This is required because otherwise the items would inherit the `flex` value of 1 from the class rule for `footer-item`. When `flex` is set, the `width` value is ignored, hence the need to reset it.
+
+<div class='footer_fb_ex4'>
+<div class='footer-item_fb_ex4 footer-one_fb_ex4'></div>
+<div class='footer-item_fb_ex4 footer-two_fb_ex4'></div>
+<div class='footer-item_fb_ex4 footer-three_fb_ex5'></div>
+</div>
+
+## Summary
+
+Flexbox gives you so much more flexibility than the old, janky floats of the previous era in web design. However, it is actually the easy part of web design. The harder part is writting the HTML CSS to get the desired layout. The first step should always be to get a pen and paper, and sketch out the boxes, then work out the behaviour of the boxes. Once you have worked out those details, flexbox makes that translation from concept to CSS easily.
+
+# Advanced Positioning
+
+So far we have been working on "Static Positioning", however there are three other types: relative, absolute, and fixed. Each of these allow you to position objects specifically using coordinates, rather than semantically, as with flexbox.
 
 <!---End Document--->
 
