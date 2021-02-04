@@ -29,7 +29,7 @@ output:
 ### Notes on compilation
 
 To correctly render in HTML with CSS, run pandoc with standalone (`-s`) option:
-
+y
 ```shell
 pandoc -s int-is-hard-notes.md -o iis-notes.html --css web-devel-notes.css
 ```
@@ -1779,7 +1779,200 @@ Flexbox gives you so much more flexibility than the old, janky floats of the pre
 
 # Advanced Positioning
 
-So far we have been working on "Static Positioning", however there are three other types: relative, absolute, and fixed. Each of these allow you to position objects specifically using coordinates, rather than semantically, as with flexbox.
+So far we have been working on "Static Positioning", however there are three other types: relative, absolute, and fixed. Each of these allow you to position objects specifically using coordinates, rather than semantically, as with flexbox. The majority of elements on a webpage should still be laid out according to a static flow, but advanced positioning schemes allow us to tweak positions of particular components and allow for more complex scenarios such as animation or menus.
+
+### Setup
+
+The examples for this section are given in the directory `advanced-positioning`.
+
+## Positioned elements
+
+A CSS property we have not seen until now is the `position` property for an element. The default value for this is `static`, and when it is *not* static the element is called a "positioned element". We start with three basic elements:
+
+```html
+<div class='container'>
+  <div class='example relative'>
+    <div class='item'><img src='images/static.svg' /></div>
+    <div class='item'><img src='images/static.svg' /></div>
+    <div class='item'><img src='images/static.svg' /></div>
+  </div>
+</div>
+```
+
+with CSS:
+
+```css
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.example {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  margin: 50px 0;
+  background-color: #D6E9FE;
+}
+
+.item img {
+  display: block;
+}
+```
+
+<div class='container_ap_ex1'>
+<div class='example_ap_ex1'>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+</div>
+</div>
+
+
+### Relative Positioning
+
+A relative positioning means that an element is positioned relative to where they would normally appear if they were a static element. We convert the middle element into a relative element:
+
+```html
+<div class='item item-relative'><img src='images/relative.svg' /></div>
+```
+
+```css
+.item-relative {
+  position: relative;
+  top: 30px;
+  left: 30px;
+}
+```
+
+<div class='container_ap_ex1'>
+<div class='example_ap_ex1'>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1 item-relative_ap_ex1'><img src='advanced-positioning/images/relative.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+</div>
+</div>
+
+The `top` and `left` property values allow us to offset the position down and to the right (counter-intuitive I know!). There are also `bottom` and `right` properties which behave in a similar way.
+
+### Absolute Positioning
+
+Absolute positioning is similar to relative positioning, but it is relative to the entire browser window instead of the original static position of the element. We won't demonstrate this here, but instead show how absolute can be used to place an element relative to its container. In order to do this, we need to change the `example` container element to have `position: relative;`.
+
+```html
+<div class='container'>
+  <div class='example absolute'>
+    <div class='item'><img src='advanced-positioning/images/static.svg' /></div>
+    <div class='item item-absolute'><img src='advanced-positioning/images/absolute.svg' /></div>
+    <div class='item'><img src='advanced-positioning/images/static.svg' /></div>
+  </div>
+</div>
+```
+
+```css
+.absolute {
+  position: relative;
+}
+
+.item-absolute {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+```
+
+<div class='container_ap_ex1'>
+<div class='example_ap_ex1 absolute_ap_ex1'>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1 item-absolute_ap_ex1'><img src='advanced-positioning/images/absolute.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+</div>
+</div>
+
+The reason we need to give the containing element a `position` value is that an absolute item will position itself relative to the closest ancestor that is positioned (i.e. not static). If all of its ancestors are static, then the element is positioned relative to the entire webpage (not very useful!).
+
+Another thing to note is that whether a position is relative or absolute affects the flow of the page. If, for example, the `justify-content` property is changed to `flex-start` for the `example` class, then there is still space left for the relative element: 
+
+<div class='container_ap_ex1'>
+<div class='example_ap_ex2'>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1 item-relative_ap_ex1'><img src='advanced-positioning/images/relative.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+</div>
+</div>
+
+On the other hand, for the absolute element, it is completely removed from the flow of the page:
+
+<div class='container_ap_ex1'>
+<div class='example_ap_ex2 absolute_ap_ex1'>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1 item-absolute_ap_ex1'><img src='advanced-positioning/images/absolute.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+</div>
+</div>
+
+### Fixed Positioning
+
+Fixed positioning means that the element is positioned relative to the browser window, not the page, meaning that it doesn't disappear or move when scrolling. An example below shows an item that would be fixed at the bottom right of the page:
+
+```css
+.item-fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+```
+
+## Positioning Elements in Animation
+
+The following is slightly out of scope for the section, but animation is a very common use of relative and absolute positioning. The following JavaScript code makes the element jump around:
+
+```js
+    <script>
+  var left = 0;
+
+  function frame() {
+    var element = document.querySelector('.item-relative');
+    if(left == 0){
+      left = left + 1;
+    }
+    left = 200 * (3.2 * left/200 * (1-left/200));
+    element.style.left = left + 'px';
+    if (left >= 300) {
+      clearInterval(id)
+    }
+  }
+
+  var id = setInterval(frame, 1000)
+  </script>
+```
+
+<div class='container_ap_ex1'>
+<div class='example_ap_ex1'>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+<div class='item_ap_ex1 item-relative_ap_ex2'><img src='advanced-positioning/images/relative.svg' /></div>
+<div class='item_ap_ex1'><img src='advanced-positioning/images/static.svg' /></div>
+</div>
+</div>
+
+
+<script>
+var left = 0;
+
+function frame() {
+var element = document.querySelector('.item-relative_ap_ex2');
+if(left == 0){
+left = left + 1;
+}
+left = 200 * (3.2 * left/200 * (1-left/200));
+element.style.left = left + 'px';
+if (left >= 300) {
+clearInterval(id)
+}
+}
+
+var id = setInterval(frame, 1000)
+</script>
 
 <!---End Document--->
 

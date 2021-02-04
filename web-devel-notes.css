@@ -329,3 +329,50 @@ body{
   flex: initial;
   width: 300px;
 }
+
+.container_ap_ex1 {
+  display: flex;
+  justify-content: center;
+}
+
+.example_ap_ex1 {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  margin: 50px 0;
+  background-color: #D6E9FE;
+}
+
+.item_ap_ex1 img {
+  display: block;
+}
+
+.item-relative_ap_ex1 {
+  position: relative;
+  top: 30px;
+  left: 30px;
+}
+
+.absolute_ap_ex1 {
+  position: relative;
+}
+
+.item-absolute_ap_ex1 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.example_ap_ex2 {
+  display: flex;
+  justify-content: flex-start;
+  width: 800px;
+  margin: 50px 0;
+  background-color: #D6E9FE;
+}
+
+.item-relative_ap_ex2 {
+  position: relative;
+  top: 30px;
+  left: 30px;
+}
