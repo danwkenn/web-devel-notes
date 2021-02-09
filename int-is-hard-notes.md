@@ -1983,12 +1983,64 @@ We can use these fixed positioning schemes to create a nice menu for navigating 
 Menus are marked up (i.e. HTML) as unordered lists, but they don't have to behave in the default way, and in most websites, they dont. We can overwrite the `block` element property in the CSS to make them `inline`, and add some spacing on the right via a margin:
 
 ```css
-
+.menu > li {
+  display: inline;
+  margin-right: 50px;
+}
 ```
 
 The child selector is used because we only want the rule to affect `<ul>` boxes inside the `menu` class.
 
-###
+We want a margin on the right for each menu item to space them out nicely, but we don't need this for the last item, so we can add a specific rule:
+
+```css
+.menu > li:last-of-type {
+  margin-right: 0;
+}
+```
+### The Submenu
+
+Semantically, a submenu is a list associated with a single list item in the menu; a list within a list! Therefore, our HTML should reflect this, and its also crucial for ensuring that search engines understand the content.
+
+```html
+<ul class='menu'>
+  <li class='dropdown'><span>Features &#9662;</span>
+    <ul class='features-menu'>           <!-- Start of submenu -->
+      <li><a href='#'>Harder</a></li>
+      <li><a href='#'>Better</a></li>
+      <li><a href='#'>Faster</a></li>
+      <li><a href='#'>Stronger</a></li>
+     </ul>                                <!-- End of submenu -->
+  </li>
+  <li><a href='#'>Blog</a></li>          <!-- These are the same -->
+  <li><a href='#'>Subscribe</a></li>
+  <li><a href='#'>About</a></li>
+</ul>
+```
+
+We want our submenu items to show up infront of the current items rather than push them down, but this will require some of the advanced positioning that we have used previously. The clue here is that we want the other menu items to retain their position regardless of the presence or position of the submenu items. This means we need some absolute positioning for the submenu items!
+
+```css
+.features-menu {
+  display: flex;
+  flex-direction: column;
+  background: #B2D6FF;
+  border-radius: 5px;
+  padding-top: 60px;
+
+  position: absolute;      /* Add these */
+  top: -25px;
+  left: -30px;
+}
+```
+
+But this will move the submenu to the top corner of the page! We want the submenu to be absolute, relative to the menu item:
+
+```css
+.dropdown {
+  position: relative;
+}
+```
 
 <!---End Document--->
 
