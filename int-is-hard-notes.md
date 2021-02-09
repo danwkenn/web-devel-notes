@@ -1974,6 +1974,22 @@ clearInterval(id)
 var id = setInterval(frame, 1000)
 </script>
 
+## Positioning Elements for Menus
+
+We can use these fixed positioning schemes to create a nice menu for navigating around the website, and using *pseudoclasses* will provide the functionality. The `menu.html` and `menu.css` files will be used to demonstrate this section. Navigation menus almost always use the `<ul>` tags rather than `<div>`'s because search engines can use and interpret `<ul>` tags much more easily.
+
+## Inline menu items
+
+Menus are marked up (i.e. HTML) as unordered lists, but they don't have to behave in the default way, and in most websites, they dont. We can overwrite the `block` element property in the CSS to make them `inline`, and add some spacing on the right via a margin:
+
+```css
+
+```
+
+The child selector is used because we only want the rule to affect `<ul>` boxes inside the `menu` class.
+
+###
+
 <!---End Document--->
 
 </div>
