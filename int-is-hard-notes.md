@@ -2084,7 +2084,135 @@ If we want the menu to drop down when we hover the cursor over "Features", we ne
 
 There are four fixed positioning schemes: relative, absolute, relatively absolute, and fixed. They are all useful for different purposes. We used relative absolute positioning as well as some other tricks and careful use of descendent selectors to create a dropdown menu. The HTML, as usual, was very simple, and served to show the semantic structure of the information. The CSS was where the magic happened! Never the less, the HTML should be the starting point for developing a new webpage from a mock-up.
 
-# Responsive Positioning
+# Responsive Design
+
+Have you noticed that websites look different for mobile phones and tablets compared to PCs. The reason is that they have responsive design: the CSS rules that are used to inform the layout are different. The CSS "queries" the media on which the webpage is being viewed and applies different rules conditional on the media. This idea fits nicely with the overall idea in web design of separating content from presentatio.
+
+### Setup
+
+The example files for this section are in `responsive-design`. 
+
+## CSS Media Queries
+
+We can create CSS rules which are only applied when the screen size is less than a certain number of pixels:
+
+```css
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  body {
+    background-color: #F09A9D; /* Red */
+  }
+}
+```
+
+This means that if the screen size i less than `400px`, then the screen colour will be red, otherwise it will be white, or whatever the colour would be if the rule were not present. This is an example of a **media query**.
+
+Media queries have the following parts:
+
+- The *at-rule*: This is the `@media` to signify that it is a media query.
+- The *media type*: This is the `only screen`, signifying that it is the screen. The "only" part ensures that it only affects screens, and not printed documents.
+- The *media feature*: This is the property of the media which is being targeted, and the condition associated. Here the condition is `max-width` and the condition threshold is `400px`, so the full feature is `max-width: 400px`.
+- The rules: These are the standard CSS rules as normal, stated in the curly brackets.
+
+As always, the [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) has a section on media queries with more information on other media types and features.
+
+
+## Principles of Responsive Design
+
+There are some standard patterns for how desktop layout collapses to be viewable on mobile, and there are design decisions behind these patterns which are beyond the scope of this chapter. However, these designs are easy to understand. Two layouts are:
+
+1. **Fluid**: when the layout stretches and shrinks to fill the width of the screen (similar to flexboxes.
+2. **Fixed-width**: when the width of the layout is the same regardless of the screen width.
+
+### Choosing Breakpoints
+
+There are tons of different mobiles, tablets, and monitors on the market, all with different screen widths. So how do we decide the pixel width cut-offs for different layouts? Designers try to make something that looks good at a given width, or a fluid layout that looks good from 300 to 500 pixels, as an example.
+
+
+## Mobile First Development
+
+A common method of developing a website intended to be viewed on multiple devices is to design the mobile webpage first, since this will typically be the simplest. The tablet and computer versions will be more complex, but can build on the CSS already present for the mobile layout.
+
+There will generally be a set of base styles before the media queries which are common to all layouts. Additionally, the `flex-wrap: wrap;` property is not doing much now, but it will make it easy to implement the tablet and PC layouts down the line. Finally, having a base style allows for more straightforward modifications for when you want to make a change on all platforms, such as the background colour.
+
+## Tablets
+
+Tablets have larger screen widths, so we can create a grid rather than a single column. Because `flex-wrap` is in our base style, all we have to do is alter the width argument and the flexbox property should take care of the rest!
+
+```css
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .sign-up,
+  .feature-1,
+  .feature-2,
+  .feature-3 {
+    width: 50%;
+  }
+}
+```
+
+As a result, when the screen size is over `400px` and below `960px`, there will be a resulting grid layout. Having a *fluid* layout, which is accomplished by having `display:flex`, also means that the webpage looks nice for all pixel sizes less than `400px` (mobile) and between `400px` and `960px` (tablet).
+
+## Desktops
+
+The fluid layout is good for mobiles and tablets because their screen widths are quite small, but it is good to have a *fixed-width* layout for desktops, since typically monitors will be much wider.
+
+```css
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  .page {
+    width: 960px;
+    margin: 0 auto;
+  }
+  .feature-1,
+  .feature-2,
+  .feature-3 {
+    width: 33.3%;
+  }
+  .header {
+    height: 400px;
+  }
+}
+```
+
+Here above we see that the `width` of `.page` is no longer relative; it is `960px`. If the screen is wider than `960px` then the background colour will appear on either side.
+
+We also see that the `.feature` elements have had a reduction in the `width` property down to `33.3%` meaning they all fit equally on the page. The `sign-up` element has not been reduced, so it will appear on a separate line to the `.features`. Supposing we want the `sign-up` to go after the `.features`, we just need to use the `order` property in some new rules inside the desktop media query:
+
+```css
+  .sign-up {
+    height: 200px;
+    order: 1;
+  }
+  .content {
+    order: 2;
+  }
+```
+
+Now `.sign-up` goes underneath the features, and `content` goes below that.
+
+## Viewport Zooming
+
+In the bad old days, mobile devices would have to contend with trying to view the full desktop site. This meant that the entire page would be shown with everything appearing very small on the screen, and the user would zoom in to iteract with the site. This is no longer necessary with our smart, responsive design, so we can disable it.
+
+This needs to go in the `<head>` tag, since it is metadata for the page.
+
+```html
+<meta name='viewport'
+      content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+```
+
+You can view webpages in a simulation of a mobile device in Google Chome, by opening up the "Developer Tools" and clicking the "Toggle Device Toolbar" icon. 
+
+The above tag should be present in every webpage you ever create!
+
+## Summary
+
+Responsive design is concerned with three things:
+
+- Building the different layouts for different devices
+- Determining the required CSS rules for creating these layouts
+- Determining the required media queries to conditionally apply these CSS rules.
 
 
 
