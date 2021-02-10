@@ -43,8 +43,8 @@ a:hover {
   margin-right: 0;
 }
 
-.features-menu {
-  display: flex;
+.dropdown:hover .features-menu {    /* This used to be `.features-menu` */
+  display: flex;                    /* Leave everything else alone */
   flex-direction: column;
   background: #B2D6FF;
   border-radius: 5px;
@@ -53,6 +53,10 @@ a:hover {
   position: absolute;      /* Add these */
   top: -25px;
   left: -30px;
+}
+
+.features-menu {                    /* Add this as a new rule */
+  display: none;
 }
 
 .features-menu li {
@@ -69,4 +73,15 @@ a:hover {
 
 .features-menu li:last-of-type {
   border-bottom: none;
+}
+
+.dropdown > span {
+  z-index: 2;
+  position: relative;  /* This is important! */
+  cursor: pointer;
+}
+
+.features-menu {
+  /* ... */
+  z-index: 1;
 }

@@ -2042,6 +2042,53 @@ But this will move the submenu to the top corner of the page! We want the submen
 }
 ```
 
+At this point everything is in the correct position however the submenu is now covering the associated menu item. We will have to learn how to bring the "Features" menu item forward so we can still see it
+
+## Z-Index
+
+It is possible to move elements forward or backward so they can be seen above other elements or sit behind other elements. This is done using the Z-index. Elements with a positive Z-index are moved forward while those with a negative value a moved backward. The default value for the Z-index is 0. For the menu, we need the "Features" element brought forward, and it will also be useful to have the submenu sit on top of other elements but behind the "Features" element:
+
+```css
+.dropdown > span {
+  z-index: 2;
+  position: relative;  /* This is important! */
+  cursor: pointer;
+}
+
+.features-menu {
+  /* ... */
+  z-index: 1;
+}
+```
+
+Note that only *positioned elements* pay attention to the `z-index` property; static positioned elements will ignore it. Also note that even though "Features" is not a link, our cursor changes when we hover over it. This is because the `cursor: pointer` property is being used in the above rule (See the [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor) for details).
+
+### A Dropdown Menu
+
+If we want the menu to drop down when we hover the cursor over "Features", we need to use the *pseudoclass*. Normally, the submenu should not be seen, but should appear when the cursor is positioned there. We therefore need two rules:
+
+```css
+.dropdown:hover .features-menu {    /* This used to be `.features-menu` */
+  display: flex;                    /* Leave everything else alone */
+  flex-direction: column;
+  background: #B2D6FF;
+  /* ... */
+}
+
+.features-menu {                    /* Add this as a new rule */
+  display: none;
+}
+```
+
+## Summary
+
+There are four fixed positioning schemes: relative, absolute, relatively absolute, and fixed. They are all useful for different purposes. We used relative absolute positioning as well as some other tricks and careful use of descendent selectors to create a dropdown menu. The HTML, as usual, was very simple, and served to show the semantic structure of the information. The CSS was where the magic happened! Never the less, the HTML should be the starting point for developing a new webpage from a mock-up.
+
+# Responsive Positioning
+
+
+
+
 <!---End Document--->
 
 </div>
