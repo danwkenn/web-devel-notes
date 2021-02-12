@@ -101,7 +101,7 @@ Sections
 
 
 <h3 id="notes-on-compilation">Notes on compilation</h3>
-<p>To correctly render in HTML with CSS, run pandoc with standalone (<code>-s</code>) option:</p>
+<p>To correctly render in HTML with CSS, run pandoc with standalone (<code>-s</code>) option: y</p>
 <pre class="shell"><code>pandoc -s int-is-hard-notes.md -o iis-notes.html --css web-devel-notes.css</code></pre>
 <h1 id="introduction">Introduction</h1>
 <p>HTML stands for <em><strong>H</strong>yper<strong>T</strong>ext <strong>M</strong>arkup <strong>L</strong>anguage</em>. Hypertext means text with links, and markup means taking the raw content and “marking it up” to have a structure.</p>
@@ -1578,6 +1578,203 @@ clearInterval(id)
 
 var id = setInterval(frame, 1000)
 </script>
+<h2 id="positioning-elements-for-menus">Positioning Elements for Menus</h2>
+<p>We can use these fixed positioning schemes to create a nice menu for navigating around the website, and using <em>pseudoclasses</em> will provide the functionality. The <code>menu.html</code> and <code>menu.css</code> files will be used to demonstrate this section. Navigation menus almost always use the <code>&lt;ul&gt;</code> tags rather than <code>&lt;div&gt;</code>’s because search engines can use and interpret <code>&lt;ul&gt;</code> tags much more easily.</p>
+<h2 id="inline-menu-items">Inline menu items</h2>
+<p>Menus are marked up (i.e. HTML) as unordered lists, but they don’t have to behave in the default way, and in most websites, they dont. We can overwrite the <code>block</code> element property in the CSS to make them <code>inline</code>, and add some spacing on the right via a margin:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb95-1"><a href="#cb95-1"></a><span class="fu">.menu</span> <span class="op">&gt;</span> li {</span>
+<span id="cb95-2"><a href="#cb95-2"></a>  <span class="kw">display</span>: <span class="dv">inline</span><span class="op">;</span></span>
+<span id="cb95-3"><a href="#cb95-3"></a>  <span class="kw">margin-right</span>: <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb95-4"><a href="#cb95-4"></a>}</span></code></pre></div>
+<p>The child selector is used because we only want the rule to affect <code>&lt;ul&gt;</code> boxes inside the <code>menu</code> class.</p>
+<p>We want a margin on the right for each menu item to space them out nicely, but we don’t need this for the last item, so we can add a specific rule:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb96-1"><a href="#cb96-1"></a><span class="fu">.menu</span> <span class="op">&gt;</span> li<span class="in">:last-of-type</span> {</span>
+<span id="cb96-2"><a href="#cb96-2"></a>  <span class="kw">margin-right</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb96-3"><a href="#cb96-3"></a>}</span></code></pre></div>
+<h3 id="the-submenu">The Submenu</h3>
+<p>Semantically, a submenu is a list associated with a single list item in the menu; a list within a list! Therefore, our HTML should reflect this, and its also crucial for ensuring that search engines understand the content.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb97-1"><a href="#cb97-1"></a><span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">&#39;menu&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb97-2"><a href="#cb97-2"></a>  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">&#39;dropdown&#39;</span><span class="kw">&gt;&lt;span&gt;</span>Features <span class="dv">&amp;#9662;</span><span class="kw">&lt;/span&gt;</span></span>
+<span id="cb97-3"><a href="#cb97-3"></a>    <span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">&#39;features-menu&#39;</span><span class="kw">&gt;</span>           <span class="co">&lt;!-- Start of submenu --&gt;</span></span>
+<span id="cb97-4"><a href="#cb97-4"></a>      <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>Harder<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb97-5"><a href="#cb97-5"></a>      <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>Better<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb97-6"><a href="#cb97-6"></a>      <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>Faster<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb97-7"><a href="#cb97-7"></a>      <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>Stronger<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb97-8"><a href="#cb97-8"></a>     <span class="kw">&lt;/ul&gt;</span>                                <span class="co">&lt;!-- End of submenu --&gt;</span></span>
+<span id="cb97-9"><a href="#cb97-9"></a>  <span class="kw">&lt;/li&gt;</span></span>
+<span id="cb97-10"><a href="#cb97-10"></a>  <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>Blog<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>          <span class="co">&lt;!-- These are the same --&gt;</span></span>
+<span id="cb97-11"><a href="#cb97-11"></a>  <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>Subscribe<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb97-12"><a href="#cb97-12"></a>  <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&#39;#&#39;</span><span class="kw">&gt;</span>About<span class="kw">&lt;/a&gt;&lt;/li&gt;</span></span>
+<span id="cb97-13"><a href="#cb97-13"></a><span class="kw">&lt;/ul&gt;</span></span></code></pre></div>
+<p>We want our submenu items to show up infront of the current items rather than push them down, but this will require some of the advanced positioning that we have used previously. The clue here is that we want the other menu items to retain their position regardless of the presence or position of the submenu items. This means we need some absolute positioning for the submenu items!</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb98-1"><a href="#cb98-1"></a><span class="fu">.features-menu</span> {</span>
+<span id="cb98-2"><a href="#cb98-2"></a>  <span class="kw">display</span>: flex<span class="op">;</span></span>
+<span id="cb98-3"><a href="#cb98-3"></a>  <span class="kw">flex-direction</span>: column<span class="op">;</span></span>
+<span id="cb98-4"><a href="#cb98-4"></a>  <span class="kw">background</span>: <span class="cn">#B2D6FF</span><span class="op">;</span></span>
+<span id="cb98-5"><a href="#cb98-5"></a>  <span class="kw">border-radius</span>: <span class="dv">5</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb98-6"><a href="#cb98-6"></a>  <span class="kw">padding-top</span>: <span class="dv">60</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb98-7"><a href="#cb98-7"></a></span>
+<span id="cb98-8"><a href="#cb98-8"></a>  <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span>      <span class="co">/* Add these */</span></span>
+<span id="cb98-9"><a href="#cb98-9"></a>  <span class="kw">top</span>: <span class="dv">-25</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb98-10"><a href="#cb98-10"></a>  <span class="kw">left</span>: <span class="dv">-30</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb98-11"><a href="#cb98-11"></a>}</span></code></pre></div>
+<p>But this will move the submenu to the top corner of the page! We want the submenu to be absolute, relative to the menu item:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb99-1"><a href="#cb99-1"></a><span class="fu">.dropdown</span> {</span>
+<span id="cb99-2"><a href="#cb99-2"></a>  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></span>
+<span id="cb99-3"><a href="#cb99-3"></a>}</span></code></pre></div>
+<p>At this point everything is in the correct position however the submenu is now covering the associated menu item. We will have to learn how to bring the “Features” menu item forward so we can still see it</p>
+<h2 id="z-index">Z-Index</h2>
+<p>It is possible to move elements forward or backward so they can be seen above other elements or sit behind other elements. This is done using the Z-index. Elements with a positive Z-index are moved forward while those with a negative value a moved backward. The default value for the Z-index is 0. For the menu, we need the “Features” element brought forward, and it will also be useful to have the submenu sit on top of other elements but behind the “Features” element:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb100-1"><a href="#cb100-1"></a><span class="fu">.dropdown</span> <span class="op">&gt;</span> span {</span>
+<span id="cb100-2"><a href="#cb100-2"></a>  <span class="kw">z-index</span>: <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb100-3"><a href="#cb100-3"></a>  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span>  <span class="co">/* This is important! */</span></span>
+<span id="cb100-4"><a href="#cb100-4"></a>  <span class="kw">cursor</span>: <span class="dv">pointer</span><span class="op">;</span></span>
+<span id="cb100-5"><a href="#cb100-5"></a>}</span>
+<span id="cb100-6"><a href="#cb100-6"></a></span>
+<span id="cb100-7"><a href="#cb100-7"></a><span class="fu">.features-menu</span> {</span>
+<span id="cb100-8"><a href="#cb100-8"></a>  <span class="co">/* ... */</span></span>
+<span id="cb100-9"><a href="#cb100-9"></a>  <span class="kw">z-index</span>: <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb100-10"><a href="#cb100-10"></a>}</span></code></pre></div>
+<p>Note that only <em>positioned elements</em> pay attention to the <code>z-index</code> property; static positioned elements will ignore it. Also note that even though “Features” is not a link, our cursor changes when we hover over it. This is because the <code>cursor: pointer</code> property is being used in the above rule (See the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">MDN</a> for details).</p>
+<h3 id="a-dropdown-menu">A Dropdown Menu</h3>
+<p>If we want the menu to drop down when we hover the cursor over “Features”, we need to use the <em>pseudoclass</em>. Normally, the submenu should not be seen, but should appear when the cursor is positioned there. We therefore need two rules:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb101-1"><a href="#cb101-1"></a><span class="fu">.dropdown</span><span class="in">:hover</span> <span class="fu">.features-menu</span> {    <span class="co">/* This used to be `.features-menu` */</span></span>
+<span id="cb101-2"><a href="#cb101-2"></a>  <span class="kw">display</span>: flex<span class="op">;</span>                    <span class="co">/* Leave everything else alone */</span></span>
+<span id="cb101-3"><a href="#cb101-3"></a>  <span class="kw">flex-direction</span>: column<span class="op">;</span></span>
+<span id="cb101-4"><a href="#cb101-4"></a>  <span class="kw">background</span>: <span class="cn">#B2D6FF</span><span class="op">;</span></span>
+<span id="cb101-5"><a href="#cb101-5"></a>  <span class="co">/* ... */</span></span>
+<span id="cb101-6"><a href="#cb101-6"></a>}</span>
+<span id="cb101-7"><a href="#cb101-7"></a></span>
+<span id="cb101-8"><a href="#cb101-8"></a><span class="fu">.features-menu</span> {                    <span class="co">/* Add this as a new rule */</span></span>
+<span id="cb101-9"><a href="#cb101-9"></a>  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb101-10"><a href="#cb101-10"></a>}</span></code></pre></div>
+<h2 id="summary-3">Summary</h2>
+<p>There are four fixed positioning schemes: relative, absolute, relatively absolute, and fixed. They are all useful for different purposes. We used relative absolute positioning as well as some other tricks and careful use of descendent selectors to create a dropdown menu. The HTML, as usual, was very simple, and served to show the semantic structure of the information. The CSS was where the magic happened! Never the less, the HTML should be the starting point for developing a new webpage from a mock-up.</p>
+<h1 id="responsive-design">Responsive Design</h1>
+<p>Have you noticed that websites look different for mobile phones and tablets compared to PCs. The reason is that they have responsive design: the CSS rules that are used to inform the layout are different. The CSS “queries” the media on which the webpage is being viewed and applies different rules conditional on the media. This idea fits nicely with the overall idea in web design of separating content from presentatio.</p>
+<h3 id="setup-4">Setup</h3>
+<p>The example files for this section are in <code>responsive-design</code>.</p>
+<h2 id="css-media-queries">CSS Media Queries</h2>
+<p>We can create CSS rules which are only applied when the screen size is less than a certain number of pixels:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb102-1"><a href="#cb102-1"></a><span class="co">/* Mobile Styles */</span></span>
+<span id="cb102-2"><a href="#cb102-2"></a><span class="im">@media</span> <span class="kw">only</span> <span class="dv">screen</span> <span class="kw">and</span> (<span class="kw">max-width</span>: <span class="dv">400</span><span class="dt">px</span>) {</span>
+<span id="cb102-3"><a href="#cb102-3"></a>  body {</span>
+<span id="cb102-4"><a href="#cb102-4"></a>    <span class="kw">background-color</span>: <span class="cn">#F09A9D</span><span class="op">;</span> <span class="co">/* Red */</span></span>
+<span id="cb102-5"><a href="#cb102-5"></a>  }</span>
+<span id="cb102-6"><a href="#cb102-6"></a>}</span></code></pre></div>
+<p>This means that if the screen size i less than <code>400px</code>, then the screen colour will be red, otherwise it will be white, or whatever the colour would be if the rule were not present. This is an example of a <strong>media query</strong>.</p>
+<p>Media queries have the following parts:</p>
+<ul>
+<li>The <em>at-rule</em>: This is the <code>@media</code> to signify that it is a media query.</li>
+<li>The <em>media type</em>: This is the <code>only screen</code>, signifying that it is the screen. The “only” part ensures that it only affects screens, and not printed documents.</li>
+<li>The <em>media feature</em>: This is the property of the media which is being targeted, and the condition associated. Here the condition is <code>max-width</code> and the condition threshold is <code>400px</code>, so the full feature is <code>max-width: 400px</code>.</li>
+<li>The rules: These are the standard CSS rules as normal, stated in the curly brackets.</li>
+</ul>
+<p>As always, the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media">MDN</a> has a section on media queries with more information on other media types and features.</p>
+<h2 id="principles-of-responsive-design">Principles of Responsive Design</h2>
+<p>There are some standard patterns for how desktop layout collapses to be viewable on mobile, and there are design decisions behind these patterns which are beyond the scope of this chapter. However, these designs are easy to understand. Two layouts are:</p>
+<ol type="1">
+<li><strong>Fluid</strong>: when the layout stretches and shrinks to fill the width of the screen (similar to flexboxes.</li>
+<li><strong>Fixed-width</strong>: when the width of the layout is the same regardless of the screen width.</li>
+</ol>
+<h3 id="choosing-breakpoints">Choosing Breakpoints</h3>
+<p>There are tons of different mobiles, tablets, and monitors on the market, all with different screen widths. So how do we decide the pixel width cut-offs for different layouts? Designers try to make something that looks good at a given width, or a fluid layout that looks good from 300 to 500 pixels, as an example.</p>
+<h2 id="mobile-first-development">Mobile First Development</h2>
+<p>A common method of developing a website intended to be viewed on multiple devices is to design the mobile webpage first, since this will typically be the simplest. The tablet and computer versions will be more complex, but can build on the CSS already present for the mobile layout.</p>
+<p>There will generally be a set of base styles before the media queries which are common to all layouts. Additionally, the <code>flex-wrap: wrap;</code> property is not doing much now, but it will make it easy to implement the tablet and PC layouts down the line. Finally, having a base style allows for more straightforward modifications for when you want to make a change on all platforms, such as the background colour.</p>
+<h2 id="tablets">Tablets</h2>
+<p>Tablets have larger screen widths, so we can create a grid rather than a single column. Because <code>flex-wrap</code> is in our base style, all we have to do is alter the width argument and the flexbox property should take care of the rest!</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb103-1"><a href="#cb103-1"></a><span class="co">/* Tablet Styles */</span></span>
+<span id="cb103-2"><a href="#cb103-2"></a><span class="im">@media</span> <span class="kw">only</span> <span class="dv">screen</span> <span class="kw">and</span> (<span class="kw">min-width</span>: <span class="dv">401</span><span class="dt">px</span>) <span class="kw">and</span> (<span class="kw">max-width</span>: <span class="dv">960</span><span class="dt">px</span>) {</span>
+<span id="cb103-3"><a href="#cb103-3"></a>  <span class="fu">.sign-up</span><span class="op">,</span></span>
+<span id="cb103-4"><a href="#cb103-4"></a>  <span class="fu">.feature-1</span><span class="op">,</span></span>
+<span id="cb103-5"><a href="#cb103-5"></a>  <span class="fu">.feature-2</span><span class="op">,</span></span>
+<span id="cb103-6"><a href="#cb103-6"></a>  <span class="fu">.feature-3</span> {</span>
+<span id="cb103-7"><a href="#cb103-7"></a>    <span class="kw">width</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb103-8"><a href="#cb103-8"></a>  }</span>
+<span id="cb103-9"><a href="#cb103-9"></a>}</span></code></pre></div>
+<p>As a result, when the screen size is over <code>400px</code> and below <code>960px</code>, there will be a resulting grid layout. Having a <em>fluid</em> layout, which is accomplished by having <code>display:flex</code>, also means that the webpage looks nice for all pixel sizes less than <code>400px</code> (mobile) and between <code>400px</code> and <code>960px</code> (tablet).</p>
+<h2 id="desktops">Desktops</h2>
+<p>The fluid layout is good for mobiles and tablets because their screen widths are quite small, but it is good to have a <em>fixed-width</em> layout for desktops, since typically monitors will be much wider.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb104-1"><a href="#cb104-1"></a><span class="co">/* Desktop Styles */</span></span>
+<span id="cb104-2"><a href="#cb104-2"></a><span class="im">@media</span> <span class="kw">only</span> <span class="dv">screen</span> <span class="kw">and</span> (<span class="kw">min-width</span>: <span class="dv">961</span><span class="dt">px</span>) {</span>
+<span id="cb104-3"><a href="#cb104-3"></a>  <span class="fu">.page</span> {</span>
+<span id="cb104-4"><a href="#cb104-4"></a>    <span class="kw">width</span>: <span class="dv">960</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb104-5"><a href="#cb104-5"></a>    <span class="kw">margin</span>: <span class="dv">0</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb104-6"><a href="#cb104-6"></a>  }</span>
+<span id="cb104-7"><a href="#cb104-7"></a>  <span class="fu">.feature-1</span><span class="op">,</span></span>
+<span id="cb104-8"><a href="#cb104-8"></a>  <span class="fu">.feature-2</span><span class="op">,</span></span>
+<span id="cb104-9"><a href="#cb104-9"></a>  <span class="fu">.feature-3</span> {</span>
+<span id="cb104-10"><a href="#cb104-10"></a>    <span class="kw">width</span>: <span class="dv">33.3</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb104-11"><a href="#cb104-11"></a>  }</span>
+<span id="cb104-12"><a href="#cb104-12"></a>  <span class="fu">.header</span> {</span>
+<span id="cb104-13"><a href="#cb104-13"></a>    <span class="kw">height</span>: <span class="dv">400</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb104-14"><a href="#cb104-14"></a>  }</span>
+<span id="cb104-15"><a href="#cb104-15"></a>}</span></code></pre></div>
+<p>Here above we see that the <code>width</code> of <code>.page</code> is no longer relative; it is <code>960px</code>. If the screen is wider than <code>960px</code> then the background colour will appear on either side.</p>
+<p>We also see that the <code>.feature</code> elements have had a reduction in the <code>width</code> property down to <code>33.3%</code> meaning they all fit equally on the page. The <code>sign-up</code> element has not been reduced, so it will appear on a separate line to the <code>.features</code>. Supposing we want the <code>sign-up</code> to go after the <code>.features</code>, we just need to use the <code>order</code> property in some new rules inside the desktop media query:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb105-1"><a href="#cb105-1"></a>  <span class="fu">.sign-up</span> {</span>
+<span id="cb105-2"><a href="#cb105-2"></a>    <span class="kw">height</span>: <span class="dv">200</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb105-3"><a href="#cb105-3"></a>    <span class="kw">order</span>: <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb105-4"><a href="#cb105-4"></a>  }</span>
+<span id="cb105-5"><a href="#cb105-5"></a>  <span class="fu">.content</span> {</span>
+<span id="cb105-6"><a href="#cb105-6"></a>    <span class="kw">order</span>: <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb105-7"><a href="#cb105-7"></a>  }</span></code></pre></div>
+<p>Now <code>.sign-up</code> goes underneath the features, and <code>content</code> goes below that.</p>
+<h2 id="viewport-zooming">Viewport Zooming</h2>
+<p>In the bad old days, mobile devices would have to contend with trying to view the full desktop site. This meant that the entire page would be shown with everything appearing very small on the screen, and the user would zoom in to iteract with the site. This is no longer necessary with our smart, responsive design, so we can disable it.</p>
+<p>This needs to go in the <code>&lt;head&gt;</code> tag, since it is metadata for the page.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb106-1"><a href="#cb106-1"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&#39;viewport&#39;</span></span>
+<span id="cb106-2"><a href="#cb106-2"></a><span class="ot">      content=</span><span class="st">&#39;width=device-width, initial-scale=1.0, maximum-scale=1.0&#39;</span> <span class="kw">/&gt;</span></span></code></pre></div>
+<p>You can view webpages in a simulation of a mobile device in Google Chome, by opening up the “Developer Tools” and clicking the “Toggle Device Toolbar” icon.</p>
+<p>The above tag should be present in every webpage you ever create!</p>
+<h2 id="summary-4">Summary</h2>
+<p>Responsive design is concerned with three things:</p>
+<ul>
+<li>Building the different layouts for different devices</li>
+<li>Determining the required CSS rules for creating these layouts</li>
+<li>Determining the required media queries to conditionally apply these CSS rules.</li>
+</ul>
+<h1 id="responsive-images">Responsive Images</h1>
+<p>In the previous section, we saw how to use a media query to adjust CSS rules to better display the content on different screen sizes. Now we want to be able to display images on different screen sizes as well. This is not as simple as with text content because images, unlike text, have inherent dimensions. For example, we don’t want to blow up images indefinitely for larger screen sizes, because they can become pixelated. There are three sets of parameters that we need to consider here:</p>
+<ul>
+<li>The screen’s dimensions</li>
+<li>The image’s dimensions</li>
+<li>The screen’s resolution.</li>
+</ul>
+<h2 id="retina-screens">Retina Screens</h2>
+<p>Retina screens, such as those on a mobile phone, have a higher screen resolution than standard screens. This literally means there are smaller (and more) pixels for the same width and height. It varies between device models, but generally there are around 4 pixels on a retina screen for every one pixel on a standard screen. The result is that to render an image correctly on a retina screen, it needs to have twice the number of pixels in terms of width and height.</p>
+<h2 id="responsive-svg-images">Responsive SVG Images</h2>
+<p>Recall that SVG images are actually vectorised, meaning they are made of lines and geometric objects rather than pixels. Because of this, they can easily be scaled up and down without any loss in quality. For an SVG image called <code>illustration.svg</code> we can insert it into the page using:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb107-1"><a href="#cb107-1"></a> <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&#39;illustration&#39;</span><span class="ot"> src=</span><span class="st">&#39;images/illustration.svg&#39;</span> <span class="kw">/&gt;</span></span></code></pre></div>
+<p>and give it the CSS rule:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb108-1"><a href="#cb108-1"></a><span class="fu">.illustration</span> {</span>
+<span id="cb108-2"><a href="#cb108-2"></a>  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb108-3"><a href="#cb108-3"></a>}</span></code></pre></div>
+<p>Changing the screen size will result in the image getting larger or smaller.</p>
+<p><img class='illustration_ri_ex1' src='responsive-design/images/illustration.svg' /></p>
+<p>This is nice, but you’ll notice that the image gets very large when the screen width is very large. Therefore, we want to set some kind of maximum size on the image:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb109-1"><a href="#cb109-1"></a><span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&#39;illustration&#39;</span><span class="ot"> src=</span><span class="st">&#39;images/illustration.svg&#39;</span><span class="ot"> style=</span><span class="st">&#39;max-width: 500px&#39;</span><span class="kw">/&gt;</span></span></code></pre></div>
+<p><img class='illustration_ri_ex1' src='responsive-design/images/illustration.svg' style='max-width: 500px'/></p>
+<p>You will notice that we have used an inline style, which is generally frowned upon, because HTML is for content, while CSS is for style and layout. However, this case is considered OK, because it is a property of the content that it should not be “blown up” any higher than 500px.</p>
+<h2 id="responsive-raster-images">Responsive Raster Images</h2>
+<p>Other typical image files are raster type images, such as PNG, JPEG and GIF. Because these are pixel-based, they will render different on high resolution devices such as retina screens.</p>
+<p>The simplest way to fix this is to use a high definition image, which will allow the image to be rendered nicely on all devices. However, large image files are more computationally intensive to render, so this may result in a reduced user experience.</p>
+<h2 id="retina-optimisation-using-srcset">Retina Optimisation using SRCSET</h2>
+<p>The <code>srcset</code> attribute in the <code>&lt;img/&gt;</code> element tag provides a means of presenting a high respolution version of an image to retina devices, and a lower resolution image for standard screens:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb110-1"><a href="#cb110-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&#39;illustration&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb110-2"><a href="#cb110-2"></a>  <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&#39;illustration-small.png&#39;</span></span>
+<span id="cb110-3"><a href="#cb110-3"></a><span class="ot">       srcset=</span><span class="st">&#39;images/illustration-small.png 1x,</span></span>
+<span id="cb110-4"><a href="#cb110-4"></a><span class="st">               images/illustration-big.png 2x&#39;</span></span>
+<span id="cb110-5"><a href="#cb110-5"></a><span class="ot">       style=</span><span class="st">&#39;max-width: 500px&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb110-6"><a href="#cb110-6"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>The low quality image will be presented to devices with standard definition (<code>1x</code>), while the high quality image will be served to retina screens (<code>2x</code>). The <code>src</code> attribute now serves as a kind of fall-back for older browsers that can’t interpret <code>srcset</code>. Taken from the original site, the image will look different for standard and high definition screens.</p>
+<div class="illustration">
+<p><img src='responsive-design/illustration-small.png'
+     srcset='responsive-design/images/illustration-small.png 1x,
+     responsive-design/images/illustration-big.png 2x'
+     style='max-width: 500px'/></p>
+</div>
 <!---End Document--->
 </div>
 </div>

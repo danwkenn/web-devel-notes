@@ -2215,7 +2215,120 @@ Responsive design is concerned with three things:
 - Determining the required media queries to conditionally apply these CSS rules.
 
 
+# Responsive Images
 
+In the previous section, we saw how to use a media query to adjust CSS rules to better display the content on different screen sizes. Now we want to be able to display images on different screen sizes as well. This is not as simple as with text content because images, unlike text, have inherent dimensions. For example, we don't want to blow up images indefinitely for larger screen sizes, because they can become pixelated. There are three sets of parameters that we need to consider here:
+
+- The screen's dimensions
+- The image's dimensions
+- The screen's resolution.
+
+## Retina Screens
+
+Retina screens, such as those on a mobile phone, have a higher screen resolution than standard screens. This literally means there are smaller (and more) pixels for the same width and height. It varies between device models, but generally there are around 4 pixels on a retina screen for every one pixel on a standard screen. The result is that to render an image correctly on a retina screen, it needs to have twice the number of pixels in terms of width and height.
+
+## Responsive SVG Images
+
+Recall that SVG images are actually vectorised, meaning they are made of lines and geometric objects rather than pixels. Because of this, they can easily be scaled up and down without any loss in quality. For an SVG image called `illustration.svg` we can insert it into the page using:
+
+```html
+ <img class='illustration' src='images/illustration.svg' />
+```
+
+and give it the CSS rule:
+
+```css
+.illustration {
+  width: 100%;
+}
+```
+Changing the screen size will result in the image getting larger or smaller.
+
+ <img class='illustration_ri_ex1' src='responsive-design/images/illustration.svg' />
+
+This is nice, but you'll notice that the image gets very large when the screen width is very large. Therefore, we want to set some kind of maximum size on the image:
+
+```html
+<img class='illustration' src='images/illustration.svg' style='max-width: 500px'/>
+```
+
+<img class='illustration_ri_ex1' src='responsive-design/images/illustration.svg' style='max-width: 500px'/>
+
+You will notice that we have used an inline style, which is generally frowned upon, because HTML is for content, while CSS is for style and layout. However, this case is considered OK, because it is a property of the content that it should not be "blown up" any higher than 500px.
+
+## Responsive Raster Images
+
+Other typical image files are raster type images, such as PNG, JPEG and GIF. Because these are pixel-based, they will render different on high resolution devices such as retina screens.
+
+The simplest way to fix this is to use a high definition image, which will allow the image to be rendered nicely on all devices. However, large image files are more computationally intensive to render, so this may result in a reduced user experience.
+
+## Retina Optimisation using SRCSET
+
+The `srcset` attribute in the `<img/>` element tag provides a means of presenting a high respolution version of an image to retina devices, and a lower resolution image for standard screens:
+
+```html
+<div class='illustration'>
+  <img src='illustration-small.png'
+       srcset='images/illustration-small.png 1x,
+               images/illustration-big.png 2x'
+       style='max-width: 500px'/>
+</div>
+```
+
+The low quality image will be presented to devices with standard definition (`1x`), while the high quality image will be served to retina screens (`2x`). The `src` attribute now serves as a kind of fall-back for older browsers that can't interpret `srcset`. Taken from the original site, the image will look different for standard and high definition screens.
+
+<div class='illustration'>
+<img src='responsive-design/illustration-small.png'
+	 srcset='responsive-design/images/illustration-small.png 1x,
+	 responsive-design/images/illustration-big.png 2x'
+	 style='max-width: 500px'/>
+</div>
+
+## Screen width Optimisation Using SRCSET
+
+The `srcset` technique is nice, but mobile phone screens are quite small, so the low resolution image may suffice anyway. We need a more sophisticated rule.
+
+Suppose we have an image to go in our header, which is 1000 pixels wide in the desktop layout. For a retina screen, we therefore need it to be 2000 pixels wide, but we can get away with 1000 pixels on a standard screen. For a mobile phone with a retina screen, because phone screens are about 400 pixels wide, we can get away with the standard image size of 1000 pixels, since we only need it to be 800 pixels wide.
+
+The idea here is that we want to optimise images based on their final rendered dimensions, not merely the screen resolution, which acts as a multiplier.
+
+```html
+<div class='section header'>
+  <div class='photo'>
+    <img src='images/photo-small.jpg'
+         srcset='images/photo-big.jpg 2000w,
+                 images/photo-small.jpg 1000w'
+         sizes='(min-width: 960px) 960px,
+                100vw'/>
+  </div>
+</div>
+```
+
+The `w` character is a special unit used only for image optimisation. The value `2000w` is the inherent physical width of the image in pixels. We also provide a `sizes` attribute, which is a series of media queries and associated  *rendered widths*. It is saying to display the big image when the width of the screen is at least 960 pixels wide, and otherwise, it should be 100% of the screen width, which is coded as `vw` (stands for viewport width). 
+
+The result is that when serving to standard definition, we always give the low resolution image. For retina screens, we give them the low resolution image if the screen size is less than 500 pixels.
+
+## Art Direction Using `<picture>`
+
+The following section entails a more advanced version of responsive imaging, for a more "directed" approach. For example, it might look nicer to have a cropped "tall" image in the mobile view as opposed to a scaled down wide image which is the same as the desktop. For this we use the `<picture>` tag, which forms a wrapper, and the `<source>` element, which conditionally loads images based on media queries.
+
+```html
+<div class='section header'>
+  <div class='photo'>
+    <picture>
+      <source media='(min-width: 401px)'
+              srcset='images/photo-big.jpg'/>
+      <source media='(max-width: 400px)'
+              srcset='images/photo-tall.jpg'/>
+      <img src='images/photo-small.jpg'/>
+    </picture>
+  </div>
+</div>
+```
+
+In each `<source>`, we see a media query that defines when a given image should be loaded. The `<img>` element is present as a fallback for older browsers.
+
+Note however that when we do it this way, the high definition image is always used. We can use a hybrid approach, but this is quite involved.
 
 <!---End Document--->
 

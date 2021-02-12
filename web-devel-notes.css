@@ -28,7 +28,7 @@ body {
 
 .sidebar{
   float: left;                  /* Add this */
-  width: 210px;
+  width: 20%;
   background-color: #F09A9D;
   padding-left: 15px;
 }
@@ -52,13 +52,13 @@ body {
 }
 
 .page {
-  width: 1400px;
+  width: 80%;
   margin: 0 auto;
 }
 
 .content {
   float: left;                  /* Add this */
-  width: 1000px;
+  width: 70%;
   height: 100%;
   background-color: #F5CF8E;
 }
@@ -69,8 +69,7 @@ body {
 
 .container {
   overflow: hidden;
-  background-color: #EAEDF0;
-}
+  background-color: #EAEDF0;}
 
 .button {
  color: #FFF;
@@ -375,4 +374,8 @@ body{
   position: relative;
   top: 30px;
   left: 30px;
+}
+
+.illustration_ri_ex1 {
+  width: 100%;
 }
