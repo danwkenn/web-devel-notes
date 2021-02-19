@@ -1,3 +1,4 @@
+
 ---
 title: Interneting is Hard
 author: Daniel W. Kennedy
@@ -2329,6 +2330,68 @@ The following section entails a more advanced version of responsive imaging, for
 In each `<source>`, we see a media query that defines when a given image should be loaded. The `<img>` element is present as a fallback for older browsers.
 
 Note however that when we do it this way, the high definition image is always used. We can use a hybrid approach, but this is quite involved.
+
+# Web Typography
+
+Web typography is a term to describe the many aspects of the appearance of your website. This includes CSS properties such as font family, but also includes the space between and around letters, words, and lines. Also included in typography is the history behind each font family.
+
+Web developers don't tend to make granular typography decisions; that is left up to the designer. However, typography is passively only noticed by the user when it is bad, so the web developer needs to be able to *see* the typography the way the designer does, and make sure it works on the webpage.
+
+This section teaches the concepts of typography and design more than the actual CSS to achieve it. The basic, fundamental rules, which are grounded in function, are detailed to make your content more readable and more effective.
+
+## History of Web Fonts
+
+In the beginning there was only **websafe fonts**. These are fonts which came installed on most computers, and as such the developer could be reasonably sure the text on the page would properly render. To include additional fonts, the developer would need to use an image, with the `<img/>` element. Yuck!
+
+Eventually (circa 2010) browsers began to support **custom webfonts**, where the font could be included in the webpage. However, each browser required a different file-format in the beginning, so websites would need to include at least 4 different formats.
+
+Most modern browsers now support an industry standard for fonts called the **Web Open Font Format (WOFF)**, so things have gotten much simpler. The `.woff` format is supported by 90% of modern browsers, and the `.woff2` format, which is an improved version with better compression is also becoming supported in the cutting edge browser versions.
+
+## Where to find webfonts
+
+Webfonts are now found for free in many places and in premium repositories as well. One free option is called [Font Squirrel](https://www.fontsquirrel.com/), however with fonts you get what you pay for. Often these repositories will offer webfonts and also desktop fonts such as `.otf` and `.ttf`, but WOFF types are specifically designed for the modern web and should be chosen over desktop fonts.
+
+### Set-up
+
+The example files for this section are contained in the directory `web-typography`.
+
+## Locally Hosted Web Fonts
+
+The first way to add a fontset is to direct the browser to a local file. This is done using an at-rule in the CSS:
+
+```css
+@font-face {
+  font-family: 'Roboto';
+  src: url('Roboto-Light-webfont.woff') format('woff');
+}
+```
+
+The code above defines the name of the family in `font-family`, then specifies where the `.woff` file is located via `src`, and specifies that it is a `woff` formatted file. The path can be absolute, relative, or root-relative, however it is relative to the location of the CSS file, not the HTML webpage.
+
+## Using a Web Font
+
+We already know how to use a webfont: apply it via a CSS rule. For example, we can make it the default for the entire `body`:
+
+```css
+body {
+  font-family: 'Roboto', sans-serif;   /* Add 'Roboto' here */
+  font-size: 18px;
+  line-height: 1.8em;
+  color: #5D6063;
+}
+```
+
+If we want a page-specific style, then as usual we can add this to the `<head>` via the `<style>` tag:
+
+```html
+<style>
+  .system-fonts {
+    font-family: sans-serif;
+  }
+</style>
+```
+
+
 
 <!---End Document--->
 
