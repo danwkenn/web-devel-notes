@@ -2392,6 +2392,88 @@ If we want a page-specific style, then as usual we can add this to the `<head>` 
 ```
 
 
+## Multiple Externel Font Files
+
+It is possible to embed multiple font files in a single `<link/>` element via a different URL:
+
+```html
+<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Droid+Sans+Mono|Lato|Libre+Baskerville|Lobster|Questrial|Rokkitt|Rufina|Sorts+Mill+Goudy|UnifrakturMaguntia" rel="stylesheet">
+```
+
+We can then add each of the fonts using a page-specific style. Be careful though: each font is a separate `.woff` or `.woff2` file that needs to be loaded before it can render the page, so having many different fonts can create performance issues.
+
+## Paragraph Indentation
+
+Making sure that readers know when one paragraph ends and another begins is an important part of typography. The two solutions used in practice are:
+
+- Spacing/Margins: Having a small amount (say a line) between each paragraph.
+- Indents: Put a small amount of horizontal space on the first line of the paragraph.
+
+Good design says that you should only use one of these to signify the start of a new paragraph.
+
+The `text-indent` property in CSS defines the size of the indent of a given element such as a `<p>`aragraph:
+
+```css
+.paragraph-indent p {
+  text-indent: 1em;
+  margin-bottom: 0;
+}
+.paragraph-indent p:first-of-type {
+  text-indent: 0;
+}
+```
+
+The second CSS rule ensures that the first paragraph after a heading is not indented, as is the common style.
+
+## Text Alignment
+
+Humans read by looking at the first few letters of words then skipping to the next one, not character by character. As a result, when designing a HTML document text alignment is an important decision which takes the human physiology aspect into account. 
+
+### Left Alignment
+
+This is the most common type for text, as it provides the reader a place to come back to each time they start a new line. This is the default value, but if we want to be explicit about it we can use `text-align: left;`. 
+
+### Center Alignment
+
+This type has no anchor for the eye to jump to the next line. This is good for short line lengths and content such as poems, lyrics and headings.
+
+It is important to ensure that text alignment is consistent accross the page, or it can result in a disjointed look.
+
+### Right Alignment
+
+Suppose we have an image and we want the image's caption to go to the left of it. Then it is a nice idea to have right alignment to "attach" it visually to the image. This is the most uncomfortable to read so it should be restricted to short peices of text.
+
+### Justified Text
+
+Justified text means that the lines begin at the same vertical and end at a different but common vertical. The quality of this depends on the hyphenation engine, which inserts spacings between words and letters to acheive the effect. It is mostly best to avoid this option as browsers will tend to make it look horrible.
+
+## Vertical Text Spacing
+
+There are three useful CSS properties for creating a nice vertical spacing:
+
+- `margin-top`
+- `margin-bottom`
+- `line-height`
+
+The first two have been explained in relation to the CSS box model. The line height property determines the inner vertical spacing for lines in the same paragraph. This is also known as *leading* in typography. Two general principles for vertical layout of text are:
+
+- Give things enough space to breathe.
+- Use consistent spacing throught the webpage.
+
+## Line Length
+
+This is the horizontal width of the text, also refered to as *measure*. A good rule-of-thumb here is to limit the number of characters per line to about 80, as a long line can be uncomfortable to read and make it easy to get lost finding where the next line begins.
+
+## Other Typographic Guidelines
+
+Some final tips on basic typography:
+- Use a `font-size` of 14-20px for the `body`.
+- use curly quotes and apostrophes with HTML entities (`&rsquo;`, `&lsquo;`, `&rdquo;`, and `&ldquo;`)
+- Use proper dashes (`&ndash;`,`&ndash;`) and other HTML entity symbols (e.g. `&copy;`)
+- Don't underline text: it looks bad. The exception may be for a hover pseudoclass.
+- Use real italic font faces rather than a synthesised one as there is a subtle difference.
+
+
 
 <!---End Document--->
 
